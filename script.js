@@ -58,3 +58,24 @@ document
   });
 
 weather.fetchWeather("lagos");
+
+let weatherS = {
+  myApiKey: "eeaef18ca354d86e6dfcc382c404ed4e",
+
+  fetchMyWeather: function (city) {
+    fetch("https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=metric&appid=" + this.apiKey)
+    .then(res => res.json)
+    .then(data => this.getWeather(data))
+  },
+
+  getWeather: function (data) {
+    const {name, timezone} = data
+    const {temp, humidity} = data.main
+    const {speed} = data.wind
+    const {description, icon} = data.weather[0]
+  },
+
+  search: function(){
+    this.fetchMyWeather()
+  }
+}
